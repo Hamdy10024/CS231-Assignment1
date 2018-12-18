@@ -35,7 +35,6 @@ def svm_loss_naive(W, X, y, reg):
       if margin > 0:
         loss += margin
         dW[:, j] += X[i]  
-        dW[:, y[i]] -= X[i]
 
 
   # Right now the loss is a sum over all training examples, but we want it
