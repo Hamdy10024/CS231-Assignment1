@@ -76,7 +76,7 @@ def svm_loss_vectorized(W, X, y, reg):
   loss = np.sum(margin)/len(y)
   factor = np.ones((len(y),10)) #n*10
   factor[range(len(y)), y] = -1
-  dW = (X.T*factor)/len(y) 
+  dW = np.dot(X.T,factor)/len(y) 
   print(dW.shape)
   loss += 0.5 * reg * np.sum(W * W)
   dW += reg * W
