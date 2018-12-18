@@ -22,17 +22,19 @@ def svm_loss_naive(W, X, y, reg):
   num_classes = W.shape[1]
   num_train = X.shape[0]
   loss = 0.0
-  for i in xrange(num_train):
+  for i in range(num_train):
     scores = X[i].dot(W)
     correct_class_score = scores[y[i]]
-    for j in xrange(num_classes):
+    for j in range(num_classes):
       if j == y[i]:
         continue
       margin = scores[j] - correct_class_score + 1 # note delta = 1
       if margin > 0:
         loss += margin
+        
         dW[:, j] += X[i]  
         dW[:, y[i]] -= X[i]
+       
         
   # Right now the loss is a sum over all training examples, but we want it
   # to be an average instead so we divide by num_train.
@@ -74,13 +76,13 @@ def svm_loss_vectorized(W, X, y, reg):
   loss = np.sum(margin)/len(y)
   factor = np.ones((len(y),10)) #n*10
   factor[range(len(y)), y] = -1
-  dW = np.dot(X.T,factor)/len(y) 
+  dW = (X.T*factor)/len(y) 
   print(dW.shape)
   loss += 0.5 * reg * np.sum(W * W)
   dW += reg * W
   return loss, dW
-x = np.random.randint(low=1, high=100, size=(1000,2))
-y = np.random.randint(low = 0,high = 9,size = 1000).T
+x = np.random.randint(low=1, high=100, size=(10,2))
+y = np.random.randint(low = 0,high = 9,size = 10).T
 W = np.random.uniform(low=0.0, high=0.1, size=(2,10))
 svm_loss_naive(W,x,y,0.1)
 
