@@ -79,13 +79,13 @@ def svm_loss_vectorized(W, X, y, reg):
   miss_outs = np.sum(factor, axis=1) 
   factor[range(len(y)), y] -= miss_outs
   dW = np.dot(X.T,factor)/len(y) 
-  print(dW.shape)
+  #print(dW.shape)
   loss += 0.5 * reg * np.sum(W * W)
   dW += reg * W
   return loss, dW
-x = np.random.randint(low=1, high=100, size=(10,2))
-y = np.random.randint(low = 0,high = 9,size = 10).T
-W = np.random.uniform(low=0.0, high=0.1, size=(2,10))
-svm_loss_vectorized(W,x,y,0.1)
+#x = np.random.randint(low=1, high=100, size=(10,2))
+#y = np.random.randint(low = 0,high = 9,size = 10).T
+#W = np.random.uniform(low=0.0, high=0.1, size=(2,10))
+#svm_loss_vectorized(W,x,y,0.1)
 
  
